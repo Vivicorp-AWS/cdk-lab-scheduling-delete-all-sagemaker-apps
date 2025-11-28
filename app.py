@@ -29,6 +29,7 @@ class ScheduledSageMakerAppsShutdown(cdk.Stack):
             code=lambda_.Code.from_asset("lambda_code"),
             handler="index.handler",
             timeout=Duration.seconds(300),  # 5 minutes timeout for processing multiple apps
+            log_group=logs.LogGroup(self, "lambda_log_group", retention=logs.RetentionDays.ONE_MONTH,),  # Only retain logging for 1 month
             )
         # Attach IAM policy with necessary SageMaker permissions
         function.role.attach_inline_policy(
