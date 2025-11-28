@@ -11,8 +11,6 @@ from aws_cdk import (
     CfnOutput,
 )
 
-# Configuration constants
-REGION = "us-east-1"
 # EventBridge cron schedule: runs daily at 12:00 UTC (8:00 PM in UTC+8)
 SHUTDOWN_PATTERN_DAILY_8PM_UTC = "cron(0 12 ? * * *)"  # [NOTE] Better set multiple timestamp to prevent unexpected exceptions
 
