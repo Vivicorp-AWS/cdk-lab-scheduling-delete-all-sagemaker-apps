@@ -11,8 +11,9 @@ from aws_cdk import (
     CfnOutput,
 )
 
-# EventBridge cron schedule: runs daily at 12:00 UTC (8:00 PM in UTC+8)
-SHUTDOWN_PATTERN_DAILY_8PM_UTC = "cron(0 12 ? * * *)"  # [NOTE] Better set multiple timestamp to prevent unexpected exceptions
+# EventBridge cron schedule. The timezone is UTC.
+SHUTDOWN_PATTERN_UTC = "cron(0 12 ? * * *)"  # Runs daily at 12:00 UTC (8:00 PM in UTC+8)
+                                             # [NOTE] Better set multiple timestamp to prevent unexpected exceptions
 
 class ScheduledSageMakerAppsShutdown(cdk.Stack):
     """CDK Stack that provisions resources to automatically shutdown SageMaker Apps on a schedule."""
@@ -50,7 +51,7 @@ class ScheduledSageMakerAppsShutdown(cdk.Stack):
         # Create EventBridge rule to trigger Lambda on schedule
         schedule_rule = events.Rule(
             self, "CanvasShutdownSchedule",
-            schedule=events.Schedule.expression(SHUTDOWN_PATTERN_DAILY_8PM_UTC),
+            schedule=events.Schedule.expression(SHUTDOWN_PATTERN_UTC),
             targets=[events_targets.LambdaFunction(function)],
         )
 
