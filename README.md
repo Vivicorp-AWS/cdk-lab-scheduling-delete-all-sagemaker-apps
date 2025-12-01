@@ -21,10 +21,10 @@ The solution provisions the following AWS resources:
 
 ## Configuration
 
-You can customize the shutdown schedule by modifying the `SHUTDOWN_PATTERN_DAILY_8PM_UTC` variable in `app.py`. The default schedule is:
+You can customize the shutdown schedule by modifying the `SHUTDOWN_PATTERN_UTC` variable in `app.py`. The default schedule is:
 
 ```python
-SHUTDOWN_PATTERN_DAILY_8PM_UTC = "cron(0 12 ? * * *)"  # Daily at 12:00 UTC
+SHUTDOWN_PATTERN_UTC = "cron(0 12 ? * * *)"  # Daily at 12:00 UTC
 ```
 
 ## Usage
